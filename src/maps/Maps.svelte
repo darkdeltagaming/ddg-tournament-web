@@ -1,7 +1,6 @@
 <script>
     import MapCard from "./MapCard.svelte";
     import { fly } from "svelte/transition"
-    import { onMount } from 'svelte';
 
     let map_names = [
         "vertigo",
@@ -10,22 +9,17 @@
         "lake",
         "chill",
     ]
-    let ready = false;
-
-    onMount(() => ready = true);
 </script>
 
-{#if ready}
 <div class="wrapper">
     <div class="holder">
         {#each map_names as map_name, i}
-            <div in:fly="{{delay: 800 + 100 * i, y: 200, duration: 1000}}">
+            <div in:fly="{{delay: 1000 + 20 * i * i, y: 200, duration: 1000}}">
                 <MapCard id="map-card" map_name={map_name}/>
             </div>
         {/each}
     </div>
 </div>
-{/if}
 
 <style>
 

@@ -35,6 +35,7 @@
         height: 60vh;
         border: 3px solid #181717;
         border-radius: 10px;
+        cursor: pointer;
     }
 
     .banned {
