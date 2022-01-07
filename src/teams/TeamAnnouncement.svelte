@@ -1,15 +1,8 @@
 <script>
     import { scale } from 'svelte/transition'
 
-    let ct = [
-        "NoRysq",
-        "DanL"
-    ]
-
-    let t = [
-        "JackyBreekie",
-        "m1k3"
-    ]
+    export let ct = ["Name #1", "Name #2"]
+    export let t =["Name #3", "Name #4"]
 </script>
 
 <div class="teams" in:scale={{ delay: 600}} out:scale={{ delay: 200}}>

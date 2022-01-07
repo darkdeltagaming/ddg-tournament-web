@@ -1,16 +1,24 @@
 <script>
-    import { fade } from 'svelte/transition'
-
+    import { fade } from 'svelte/transition';
+    import { createEventDispatcher } from 'svelte';
     export let map_name;
-    let banned = false;
-    let picked = false;
 
-    function banMap() {
-        banned = true;
+    const dispatch = createEventDispatcher();
+
+    export let banned = false;
+    export let picked = false;
+
+    function dispatchBan() {
+        dispatch('ban', { name: map_name });
     }
+
+    export function pickMap() {
+        picked = true;
+    }
+
 </script>
 
-<div class="card {banned ? 'banned' : picked ? 'picked' : ''}" style="--image: url(/img/{map_name}.png);" on:click={() => banMap()}>
+<div class="card {banned ? 'banned' : picked ? 'picked' : ''}" style="--image: url(/img/{map_name}.png);" on:click={dispatchBan}>
     <div class="background"></div>
     {#if banned}
         <svg id="overlay-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -63,7 +71,7 @@
         background: var(--image);
         background-size: cover;
         background-position-x: center;
-        filter: blur(2px);
+        background-position-y: center;
         z-index: -1;
     }
 

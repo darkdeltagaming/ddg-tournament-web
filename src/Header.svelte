@@ -21,6 +21,7 @@
         display: flex;
         justify-content: left;
         align-items: center;
+        background: #18171799;
     }
 
     h1 {
