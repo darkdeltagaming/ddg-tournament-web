@@ -30,7 +30,7 @@
     <div class="leaderboard">
         <h1>LEADERBOARD</h1>
         <div class="content">
-            <div class="row title">
+            <div class="row title lighter">
                 <p>Platz</p>
                 <p>Name</p>
                 <p>Punkte</p>

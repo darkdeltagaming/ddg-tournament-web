@@ -32,7 +32,6 @@
             dispatch('changeBackground', { img: map[0] + ".png" })
         }
     }
-
 </script>
 
 <div class="wrapper">
