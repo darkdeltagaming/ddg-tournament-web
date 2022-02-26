@@ -682,6 +682,12 @@ var app = (function () {
         }
         info.block.p(child_ctx, dirty);
     }
+
+    const globals = (typeof window !== 'undefined'
+        ? window
+        : typeof globalThis !== 'undefined'
+            ? globalThis
+            : global);
     function outro_and_destroy_block(block, lookup) {
         transition_out(block, 1, 1, () => {
             lookup.delete(block.key);
@@ -1040,10 +1046,10 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			attr_dev(img, "class", "background svelte-zni3m7");
-    			if (!src_url_equal(img.src, img_src_value = "/img/" + /*displayed*/ ctx[0])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*displayed*/ ctx[0])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "background");
-    			add_location(img, file$8, 22, 12, 496);
-    			add_location(div, file$8, 21, 8, 443);
+    			add_location(img, file$8, 22, 12, 501);
+    			add_location(div, file$8, 21, 8, 448);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1051,7 +1057,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (!current || dirty & /*displayed*/ 1 && !src_url_equal(img.src, img_src_value = "/img/" + /*displayed*/ ctx[0])) {
+    			if (!current || dirty & /*displayed*/ 1 && !src_url_equal(img.src, img_src_value = /*displayed*/ ctx[0])) {
     				attr_dev(img, "src", img_src_value);
     			}
     		},
@@ -1097,7 +1103,7 @@ var app = (function () {
     			div = element("div");
     			if (if_block) if_block.c();
     			attr_dev(div, "class", "bg-container svelte-zni3m7");
-    			add_location(div, file$8, 19, 0, 389);
+    			add_location(div, file$8, 19, 0, 394);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1160,7 +1166,7 @@ var app = (function () {
     function instance$8($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Background', slots, []);
-    	let { image = "csgo.png" } = $$props;
+    	let { image = "/img/csgo.png" } = $$props;
     	let displayed = image;
     	let blacken = false;
 
@@ -1252,7 +1258,7 @@ var app = (function () {
     			h1 = element("h1");
     			t = text(t_value);
     			attr_dev(h1, "class", "svelte-1v2u9re");
-    			add_location(h1, file$7, 11, 8, 264);
+    			add_location(h1, file$7, 11, 8, 255);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -1300,10 +1306,9 @@ var app = (function () {
     	let h1;
     	let t0;
     	let t1;
-    	let t2;
     	let img;
     	let img_src_value;
-    	let t3;
+    	let t2;
     	let previous_key = /*state_name*/ ctx[1];
     	let current;
     	let key_block = create_key_block(ctx);
@@ -1312,20 +1317,19 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			h1 = element("h1");
-    			t0 = text("MATCH #");
-    			t1 = text(/*match_nr*/ ctx[0]);
-    			t2 = space();
+    			t0 = text(/*message*/ ctx[0]);
+    			t1 = space();
     			img = element("img");
-    			t3 = space();
+    			t2 = space();
     			key_block.c();
     			attr_dev(h1, "class", "svelte-1v2u9re");
-    			add_location(h1, file$7, 8, 4, 141);
+    			add_location(h1, file$7, 8, 4, 140);
     			if (!src_url_equal(img.src, img_src_value = "/favicon.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Dark Delta Gaming");
     			attr_dev(img, "class", "logo svelte-1v2u9re");
-    			add_location(img, file$7, 9, 4, 172);
+    			add_location(img, file$7, 9, 4, 163);
     			attr_dev(div, "class", "head svelte-1v2u9re");
-    			add_location(div, file$7, 7, 0, 118);
+    			add_location(div, file$7, 7, 0, 117);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1334,15 +1338,14 @@ var app = (function () {
     			insert_dev(target, div, anchor);
     			append_dev(div, h1);
     			append_dev(h1, t0);
-    			append_dev(h1, t1);
-    			append_dev(div, t2);
+    			append_dev(div, t1);
     			append_dev(div, img);
-    			append_dev(div, t3);
+    			append_dev(div, t2);
     			key_block.m(div, null);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!current || dirty & /*match_nr*/ 1) set_data_dev(t1, /*match_nr*/ ctx[0]);
+    			if (!current || dirty & /*message*/ 1) set_data_dev(t0, /*message*/ ctx[0]);
 
     			if (dirty & /*state_name*/ 2 && safe_not_equal(previous_key, previous_key = /*state_name*/ ctx[1])) {
     				group_outros();
@@ -1385,23 +1388,23 @@ var app = (function () {
     function instance$7($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Header', slots, []);
-    	let { match_nr } = $$props;
+    	let { message } = $$props;
     	let { state_name } = $$props;
-    	const writable_props = ['match_nr', 'state_name'];
+    	const writable_props = ['message', 'state_name'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Header> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('match_nr' in $$props) $$invalidate(0, match_nr = $$props.match_nr);
+    		if ('message' in $$props) $$invalidate(0, message = $$props.message);
     		if ('state_name' in $$props) $$invalidate(1, state_name = $$props.state_name);
     	};
 
-    	$$self.$capture_state = () => ({ fade, match_nr, state_name });
+    	$$self.$capture_state = () => ({ fade, message, state_name });
 
     	$$self.$inject_state = $$props => {
-    		if ('match_nr' in $$props) $$invalidate(0, match_nr = $$props.match_nr);
+    		if ('message' in $$props) $$invalidate(0, message = $$props.message);
     		if ('state_name' in $$props) $$invalidate(1, state_name = $$props.state_name);
     	};
 
@@ -1409,13 +1412,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [match_nr, state_name];
+    	return [message, state_name];
     }
 
     class Header extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { match_nr: 0, state_name: 1 });
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { message: 0, state_name: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1427,8 +1430,8 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*match_nr*/ ctx[0] === undefined && !('match_nr' in props)) {
-    			console.warn("<Header> was created without expected prop 'match_nr'");
+    		if (/*message*/ ctx[0] === undefined && !('message' in props)) {
+    			console.warn("<Header> was created without expected prop 'message'");
     		}
 
     		if (/*state_name*/ ctx[1] === undefined && !('state_name' in props)) {
@@ -1436,11 +1439,11 @@ var app = (function () {
     		}
     	}
 
-    	get match_nr() {
+    	get message() {
     		throw new Error("<Header>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set match_nr(value) {
+    	set message(value) {
     		throw new Error("<Header>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -1720,7 +1723,7 @@ var app = (function () {
     /* src/maps/MapCard.svelte generated by Svelte v3.44.3 */
     const file$4 = "src/maps/MapCard.svelte";
 
-    // (23:4) {#if status === 1}
+    // (22:4) {#if status === 1}
     function create_if_block_1$1(ctx) {
     	let bannedicon;
     	let current;
@@ -1752,14 +1755,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(23:4) {#if status === 1}",
+    		source: "(22:4) {#if status === 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (26:4) {#if status === 2}
+    // (25:4) {#if status === 3}
     function create_if_block$1(ctx) {
     	let pickedicon;
     	let current;
@@ -1791,7 +1794,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(26:4) {#if status === 2}",
+    		source: "(25:4) {#if status === 3}",
     		ctx
     	});
 
@@ -1813,7 +1816,7 @@ var app = (function () {
     	let mounted;
     	let dispose;
     	let if_block0 = /*status*/ ctx[2] === 1 && create_if_block_1$1(ctx);
-    	let if_block1 = /*status*/ ctx[2] === 2 && create_if_block$1(ctx);
+    	let if_block1 = /*status*/ ctx[2] === 3 && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1827,19 +1830,20 @@ var app = (function () {
     			div1 = element("div");
     			p = element("p");
     			t3 = text(t3_value);
-    			attr_dev(div0, "class", "background svelte-1glemz0");
-    			add_location(div0, file$4, 21, 4, 612);
-    			attr_dev(p, "class", "svelte-1glemz0");
-    			add_location(p, file$4, 29, 8, 790);
-    			attr_dev(div1, "class", "headline svelte-1glemz0");
-    			add_location(div1, file$4, 28, 4, 759);
+    			attr_dev(div0, "class", "background svelte-18hqj1c");
+    			add_location(div0, file$4, 20, 4, 678);
+    			attr_dev(p, "class", "svelte-18hqj1c");
+    			add_location(p, file$4, 28, 8, 856);
+    			attr_dev(div1, "class", "headline svelte-18hqj1c");
+    			add_location(div1, file$4, 27, 4, 825);
 
     			attr_dev(div2, "class", div2_class_value = "card " + (/*status*/ ctx[2] === 1
     			? 'banned'
-    			: /*status*/ ctx[2] === 2 ? 'picked' : '') + " svelte-1glemz0");
+    			: /*status*/ ctx[2] === 3 ? 'picked' : '') + " svelte-18hqj1c");
 
     			set_style(div2, "--image", "url('http://127.0.0.1:5500/mapImage/" + /*map_id*/ ctx[1] + "')");
-    			add_location(div2, file$4, 20, 0, 443);
+    			set_style(div2, "--pointer", /*enableBans*/ ctx[3] ? 'pointer' : 'default');
+    			add_location(div2, file$4, 17, 0, 451);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1858,7 +1862,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(div2, "click", /*dispatchBan*/ ctx[3], false, false, false);
+    				dispose = listen_dev(div2, "click", /*dispatchBan*/ ctx[4], false, false, false);
     				mounted = true;
     			}
     		},
@@ -1884,7 +1888,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*status*/ ctx[2] === 2) {
+    			if (/*status*/ ctx[2] === 3) {
     				if (if_block1) {
     					if (dirty & /*status*/ 4) {
     						transition_in(if_block1, 1);
@@ -1909,12 +1913,16 @@ var app = (function () {
 
     			if (!current || dirty & /*status*/ 4 && div2_class_value !== (div2_class_value = "card " + (/*status*/ ctx[2] === 1
     			? 'banned'
-    			: /*status*/ ctx[2] === 2 ? 'picked' : '') + " svelte-1glemz0")) {
+    			: /*status*/ ctx[2] === 3 ? 'picked' : '') + " svelte-18hqj1c")) {
     				attr_dev(div2, "class", div2_class_value);
     			}
 
     			if (!current || dirty & /*map_id*/ 2) {
     				set_style(div2, "--image", "url('http://127.0.0.1:5500/mapImage/" + /*map_id*/ ctx[1] + "')");
+    			}
+
+    			if (!current || dirty & /*enableBans*/ 8) {
+    				set_style(div2, "--pointer", /*enableBans*/ ctx[3] ? 'pointer' : 'default');
     			}
     		},
     		i: function intro(local) {
@@ -1948,23 +1956,20 @@ var app = (function () {
     	return block;
     }
 
-    function pickMap() {
-    	picked = true;
-    }
-
     function instance$4($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MapCard', slots, []);
     	let { map_name } = $$props;
     	let { map_id } = $$props;
     	let { status } = $$props;
+    	let { enableBans } = $$props;
     	const dispatch = createEventDispatcher();
 
     	function dispatchBan() {
-    		dispatch('ban', { mapId: map_id });
+    		if (enableBans && status === 0) dispatch('ban', { mapId: map_id });
     	}
 
-    	const writable_props = ['map_name', 'map_id', 'status'];
+    	const writable_props = ['map_name', 'map_id', 'status', 'enableBans'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<MapCard> was created with unknown prop '${key}'`);
@@ -1974,6 +1979,7 @@ var app = (function () {
     		if ('map_name' in $$props) $$invalidate(0, map_name = $$props.map_name);
     		if ('map_id' in $$props) $$invalidate(1, map_id = $$props.map_id);
     		if ('status' in $$props) $$invalidate(2, status = $$props.status);
+    		if ('enableBans' in $$props) $$invalidate(3, enableBans = $$props.enableBans);
     	};
 
     	$$self.$capture_state = () => ({
@@ -1983,22 +1989,23 @@ var app = (function () {
     		map_name,
     		map_id,
     		status,
+    		enableBans,
     		dispatch,
-    		dispatchBan,
-    		pickMap
+    		dispatchBan
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('map_name' in $$props) $$invalidate(0, map_name = $$props.map_name);
     		if ('map_id' in $$props) $$invalidate(1, map_id = $$props.map_id);
     		if ('status' in $$props) $$invalidate(2, status = $$props.status);
+    		if ('enableBans' in $$props) $$invalidate(3, enableBans = $$props.enableBans);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [map_name, map_id, status, dispatchBan, pickMap];
+    	return [map_name, map_id, status, enableBans, dispatchBan];
     }
 
     class MapCard extends SvelteComponentDev {
@@ -2009,7 +2016,7 @@ var app = (function () {
     			map_name: 0,
     			map_id: 1,
     			status: 2,
-    			pickMap: 4
+    			enableBans: 3
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -2032,6 +2039,10 @@ var app = (function () {
 
     		if (/*status*/ ctx[2] === undefined && !('status' in props)) {
     			console.warn("<MapCard> was created without expected prop 'status'");
+    		}
+
+    		if (/*enableBans*/ ctx[3] === undefined && !('enableBans' in props)) {
+    			console.warn("<MapCard> was created without expected prop 'enableBans'");
     		}
     	}
 
@@ -2059,11 +2070,11 @@ var app = (function () {
     		throw new Error("<MapCard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get pickMap() {
-    		return pickMap;
+    	get enableBans() {
+    		throw new Error("<MapCard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set pickMap(value) {
+    	set enableBans(value) {
     		throw new Error("<MapCard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -2177,58 +2188,57 @@ var app = (function () {
     });
 
     async function readJson(url, store) {
-        let request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.send();
-        request.onload = () => {
-            if (request.status === 200) {
-                store.set(JSON.parse(request.response));
-                return Promise.resolve();
-            }
-            console.log(`GET Request failed with code ${request.status}`);
-            return Promise.resolve();
-        };
+        let response = await getJson(url);
+        store.set(response);
+    }
+
+    async function getJson(url) {
+        const response = await fetch(url, {
+            mode: 'cors'
+        });
+        return await response.json();
     }
 
     async function postJson(url, data) {
-        let request = new XMLHttpRequest();
-        request.open("POST", url);
-
-        request.setRequestHeader("Accept", "application/json");
-        request.setRequestHeader("Content-Type", "application/json");
-
-        request.onreadystatechange = function () {
-           if (request.readyState === 4) {
-              console.log(request.responseText);
-        }};
-
-        request.send(data);
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        });
+        return await response.json();
     }
 
     var api = {
+        getJson: getJson,
         readJson: readJson,
         postJson: postJson
     };
 
     /* src/maps/Maps.svelte generated by Svelte v3.44.3 */
+
+    const { console: console_1$1 } = globals;
     const file$3 = "src/maps/Maps.svelte";
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[7] = list[i];
-    	child_ctx[9] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
-    // (57:0) {:catch _error}
-    function create_catch_block(ctx) {
+    // (84:0) {:catch _error}
+    function create_catch_block$1(ctx) {
     	let p;
 
     	const block = {
     		c: function create() {
     			p = element("p");
     			p.textContent = "An error occoured";
-    			add_location(p, file$3, 57, 0, 1731);
+    			add_location(p, file$3, 84, 0, 2652);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -2243,21 +2253,21 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_catch_block.name,
+    		id: create_catch_block$1.name,
     		type: "catch",
-    		source: "(57:0) {:catch _error}",
+    		source: "(84:0) {:catch _error}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (47:0) {:then}
-    function create_then_block(ctx) {
+    // (72:0) {:then}
+    function create_then_block$1(ctx) {
     	let div1;
     	let div0;
     	let current;
-    	let each_value = /*$activeMaps*/ ctx[0];
+    	let each_value = /*$activeMaps*/ ctx[1];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -2278,10 +2288,10 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "holder svelte-qijldd");
-    			add_location(div0, file$3, 48, 4, 1347);
-    			attr_dev(div1, "class", "wrapper svelte-qijldd");
-    			add_location(div1, file$3, 47, 0, 1321);
+    			attr_dev(div0, "class", "holder " + ('' ) + " svelte-cocjk7");
+    			add_location(div0, file$3, 73, 4, 2183);
+    			attr_dev(div1, "class", "wrapper svelte-cocjk7");
+    			add_location(div1, file$3, 72, 0, 2157);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -2294,8 +2304,8 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$activeMaps, handleBan*/ 5) {
-    				each_value = /*$activeMaps*/ ctx[0];
+    			if (dirty & /*$activeMaps, enableBans, handleBan*/ 11) {
+    				each_value = /*$activeMaps*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
 
@@ -2348,16 +2358,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_then_block.name,
+    		id: create_then_block$1.name,
     		type: "then",
-    		source: "(47:0) {:then}",
+    		source: "(72:0) {:then}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:8) {#each $activeMaps as map, i}
+    // (75:8) {#each $activeMaps as map, i}
     function create_each_block$2(ctx) {
     	let div;
     	let mapcard;
@@ -2368,21 +2378,23 @@ var app = (function () {
 
     	mapcard = new MapCard({
     			props: {
-    				map_name: /*map*/ ctx[7].display_name,
-    				map_id: /*map*/ ctx[7].mapId,
-    				status: /*map*/ ctx[7].status
+    				map_name: /*map*/ ctx[10].display_name,
+    				map_id: /*map*/ ctx[10].mapId,
+    				status: /*map*/ ctx[10].status,
+    				enableBans: /*enableBans*/ ctx[0]
     			},
     			$$inline: true
     		});
 
-    	mapcard.$on("ban", /*handleBan*/ ctx[2]);
+    	mapcard.$on("ban", /*handleBan*/ ctx[3]);
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			create_component(mapcard.$$.fragment);
     			t = space();
-    			add_location(div, file$3, 50, 12, 1418);
+    			attr_dev(div, "class", "svelte-cocjk7");
+    			add_location(div, file$3, 75, 12, 2277);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2392,9 +2404,10 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const mapcard_changes = {};
-    			if (dirty & /*$activeMaps*/ 1) mapcard_changes.map_name = /*map*/ ctx[7].display_name;
-    			if (dirty & /*$activeMaps*/ 1) mapcard_changes.map_id = /*map*/ ctx[7].mapId;
-    			if (dirty & /*$activeMaps*/ 1) mapcard_changes.status = /*map*/ ctx[7].status;
+    			if (dirty & /*$activeMaps*/ 2) mapcard_changes.map_name = /*map*/ ctx[10].display_name;
+    			if (dirty & /*$activeMaps*/ 2) mapcard_changes.map_id = /*map*/ ctx[10].mapId;
+    			if (dirty & /*$activeMaps*/ 2) mapcard_changes.status = /*map*/ ctx[10].status;
+    			if (dirty & /*enableBans*/ 1) mapcard_changes.enableBans = /*enableBans*/ ctx[0];
     			mapcard.$set(mapcard_changes);
     		},
     		i: function intro(local) {
@@ -2405,7 +2418,7 @@ var app = (function () {
     				if (div_outro) div_outro.end(1);
 
     				div_intro = create_in_transition(div, fly, {
-    					delay: 1000 + 20 * /*i*/ ctx[9] * /*i*/ ctx[9],
+    					delay: 1000 + 20 * /*i*/ ctx[12] * /*i*/ ctx[12],
     					y: 200,
     					duration: 1000
     				});
@@ -2420,7 +2433,7 @@ var app = (function () {
     			if (div_intro) div_intro.invalidate();
 
     			div_outro = create_out_transition(div, fly, {
-    				delay: 20 * (4 - /*i*/ ctx[9]) * (4 - /*i*/ ctx[9]),
+    				delay: 20 * (4 - /*i*/ ctx[12]) * (4 - /*i*/ ctx[12]),
     				y: 200,
     				duration: 500
     			});
@@ -2438,22 +2451,22 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(50:8) {#each $activeMaps as map, i}",
+    		source: "(75:8) {#each $activeMaps as map, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (45:18)  <p>receiving data</p> {:then}
-    function create_pending_block(ctx) {
+    // (70:21)  <p>receiving data</p> {:then}
+    function create_pending_block$1(ctx) {
     	let p;
 
     	const block = {
     		c: function create() {
     			p = element("p");
     			p.textContent = "receiving data";
-    			add_location(p, file$3, 45, 0, 1291);
+    			add_location(p, file$3, 70, 0, 2127);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -2468,9 +2481,9 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_pending_block.name,
+    		id: create_pending_block$1.name,
     		type: "pending",
-    		source: "(45:18)  <p>receiving data</p> {:then}",
+    		source: "(70:21)  <p>receiving data</p> {:then}",
     		ctx
     	});
 
@@ -2486,14 +2499,14 @@ var app = (function () {
     		current: null,
     		token: null,
     		hasCatch: true,
-    		pending: create_pending_block,
-    		then: create_then_block,
-    		catch: create_catch_block,
-    		error: 10,
+    		pending: create_pending_block$1,
+    		then: create_then_block$1,
+    		catch: create_catch_block$1,
+    		error: 13,
     		blocks: [,,,]
     	};
 
-    	handle_promise(/*fetchMaps*/ ctx[1], info);
+    	handle_promise(/*fetchMapInfo*/ ctx[2], info);
 
     	const block = {
     		c: function create() {
@@ -2547,16 +2560,25 @@ var app = (function () {
     }
 
     function instance$3($$self, $$props, $$invalidate) {
+    	let $mapData;
     	let $activeMaps;
+    	validate_store(mapData, 'mapData');
+    	component_subscribe($$self, mapData, $$value => $$invalidate(7, $mapData = $$value));
     	validate_store(activeMaps, 'activeMaps');
-    	component_subscribe($$self, activeMaps, $$value => $$invalidate(0, $activeMaps = $$value));
+    	component_subscribe($$self, activeMaps, $$value => $$invalidate(1, $activeMaps = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Maps', slots, []);
     	let { userId } = $$props;
     	let { sse } = $$props;
+    	let { enableBans } = $$props;
+    	let picked = false;
 
-    	const fetchMaps = (async () => {
-    		return await api.readJson('http://127.0.0.1:5500/maps', mapData);
+    	const fetchMapInfo = (async () => {
+    		await api.readJson('http://127.0.0.1:5500/maps', mapData);
+    		console.log($mapData);
+    		console.log('Fetching ban info');
+    		$$invalidate(0, enableBans = await api.getJson(`http://127.0.0.1:5500/allowBan/${userId}`));
+    		console.log('loaded ban info');
     	})();
 
     	sse.addEventListener('DDG_EVENT_MAPBAN', event => {
@@ -2576,49 +2598,79 @@ var app = (function () {
     		});
     	});
 
+    	sse.addEventListener('DDG_EVENT_MAPPICK', event => {
+    		// update the store to trigger picked map effect
+    		picked = true;
+
+    		let mapId = JSON.parse(event.data).mapId;
+
+    		mapData.update(current => {
+    			let maps = current.maps;
+    			let copied = [...maps];
+    			let target = copied.find(map => map.mapId == mapId);
+    			target.status = 3;
+    			return { maps: copied };
+    		});
+
+    		selectMap(mapId);
+    	});
+
+    	sse.addEventListener('DDG_EVENT_ALLOWBAN', _ => {
+    		$$invalidate(0, enableBans = true);
+    	});
+
     	let dispatch = createEventDispatcher();
 
     	function handleBan(event) {
     		api.postJson('http://127.0.0.1:5500/ban', JSON.stringify({ userId, mapId: event.detail.mapId }));
+    		$$invalidate(0, enableBans = false);
     	}
 
-    	function selectMap(map) {
-    		if (isMapSelected()) {
-    			dispatch('changeBackground', { img: map[0] + ".png" });
-    		}
+    	function selectMap(mapId) {
+    		dispatch('changeBackground', {
+    			img: `http://127.0.0.1:5500/mapImage/${mapId}`
+    		});
     	}
 
-    	const writable_props = ['userId', 'sse'];
+    	const writable_props = ['userId', 'sse', 'enableBans'];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Maps> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<Maps> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('userId' in $$props) $$invalidate(3, userId = $$props.userId);
-    		if ('sse' in $$props) $$invalidate(4, sse = $$props.sse);
+    		if ('userId' in $$props) $$invalidate(4, userId = $$props.userId);
+    		if ('sse' in $$props) $$invalidate(5, sse = $$props.sse);
+    		if ('enableBans' in $$props) $$invalidate(0, enableBans = $$props.enableBans);
     	};
 
     	$$self.$capture_state = () => ({
     		MapCard,
     		fly,
+    		fade,
     		createEventDispatcher,
     		activeMaps,
     		mapData,
     		readJson: api.readJson,
     		postJson: api.postJson,
+    		getJson: api.getJson,
     		userId,
     		sse,
-    		fetchMaps,
+    		enableBans,
+    		picked,
+    		fetchMapInfo,
     		dispatch,
     		handleBan,
     		selectMap,
+    		$mapData,
     		$activeMaps
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('userId' in $$props) $$invalidate(3, userId = $$props.userId);
-    		if ('sse' in $$props) $$invalidate(4, sse = $$props.sse);
+    		if ('userId' in $$props) $$invalidate(4, userId = $$props.userId);
+    		if ('sse' in $$props) $$invalidate(5, sse = $$props.sse);
+    		if ('enableBans' in $$props) $$invalidate(0, enableBans = $$props.enableBans);
+    		if ('picked' in $$props) picked = $$props.picked;
     		if ('dispatch' in $$props) dispatch = $$props.dispatch;
     	};
 
@@ -2626,13 +2678,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [$activeMaps, fetchMaps, handleBan, userId, sse];
+    	return [enableBans, $activeMaps, fetchMapInfo, handleBan, userId, sse];
     }
 
     class Maps extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { userId: 3, sse: 4 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { userId: 4, sse: 5, enableBans: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -2644,12 +2696,16 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*userId*/ ctx[3] === undefined && !('userId' in props)) {
-    			console.warn("<Maps> was created without expected prop 'userId'");
+    		if (/*userId*/ ctx[4] === undefined && !('userId' in props)) {
+    			console_1$1.warn("<Maps> was created without expected prop 'userId'");
     		}
 
-    		if (/*sse*/ ctx[4] === undefined && !('sse' in props)) {
-    			console.warn("<Maps> was created without expected prop 'sse'");
+    		if (/*sse*/ ctx[5] === undefined && !('sse' in props)) {
+    			console_1$1.warn("<Maps> was created without expected prop 'sse'");
+    		}
+
+    		if (/*enableBans*/ ctx[0] === undefined && !('enableBans' in props)) {
+    			console_1$1.warn("<Maps> was created without expected prop 'enableBans'");
     		}
     	}
 
@@ -2666,6 +2722,14 @@ var app = (function () {
     	}
 
     	set sse(value) {
+    		throw new Error("<Maps>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get enableBans() {
+    		throw new Error("<Maps>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set enableBans(value) {
     		throw new Error("<Maps>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -3336,9 +3400,210 @@ var app = (function () {
     }
 
     /* src/App.svelte generated by Svelte v3.44.3 */
+
+    const { console: console_1 } = globals;
     const file = "src/App.svelte";
 
-    // (67:0) {#if state === -1}
+    // (113:0) {:catch error}
+    function create_catch_block(ctx) {
+    	let div;
+    	let h1;
+    	let t1;
+    	let p;
+    	let t2_value = /*error*/ ctx[15] + "";
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "An error has occoured";
+    			t1 = space();
+    			p = element("p");
+    			t2 = text(t2_value);
+    			add_location(h1, file, 114, 8, 3214);
+    			add_location(p, file, 115, 8, 3253);
+    			attr_dev(div, "class", "error svelte-1qsa0p6");
+    			add_location(div, file, 113, 4, 3186);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, h1);
+    			append_dev(div, t1);
+    			append_dev(div, p);
+    			append_dev(p, t2);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_catch_block.name,
+    		type: "catch",
+    		source: "(113:0) {:catch error}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (95:0) {:then}
+    function create_then_block(ctx) {
+    	let t0;
+    	let t1;
+    	let t2;
+    	let if_block3_anchor;
+    	let current;
+    	let if_block0 = /*state*/ ctx[0] === -1 && create_if_block_3(ctx);
+    	let if_block1 = /*state*/ ctx[0] === 0 && create_if_block_2(ctx);
+    	let if_block2 = /*state*/ ctx[0] === 1 && create_if_block_1(ctx);
+    	let if_block3 = /*state*/ ctx[0] === 4 && create_if_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block0) if_block0.c();
+    			t0 = space();
+    			if (if_block1) if_block1.c();
+    			t1 = space();
+    			if (if_block2) if_block2.c();
+    			t2 = space();
+    			if (if_block3) if_block3.c();
+    			if_block3_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t0, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, t1, anchor);
+    			if (if_block2) if_block2.m(target, anchor);
+    			insert_dev(target, t2, anchor);
+    			if (if_block3) if_block3.m(target, anchor);
+    			insert_dev(target, if_block3_anchor, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*state*/ ctx[0] === -1) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_3(ctx);
+    					if_block0.c();
+    					if_block0.m(t0.parentNode, t0);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (/*state*/ ctx[0] === 0) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty & /*state*/ 1) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block_2(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(t1.parentNode, t1);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*state*/ ctx[0] === 1) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+
+    					if (dirty & /*state*/ 1) {
+    						transition_in(if_block2, 1);
+    					}
+    				} else {
+    					if_block2 = create_if_block_1(ctx);
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(t2.parentNode, t2);
+    				}
+    			} else if (if_block2) {
+    				group_outros();
+
+    				transition_out(if_block2, 1, 1, () => {
+    					if_block2 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*state*/ ctx[0] === 4) {
+    				if (if_block3) {
+    					if (dirty & /*state*/ 1) {
+    						transition_in(if_block3, 1);
+    					}
+    				} else {
+    					if_block3 = create_if_block(ctx);
+    					if_block3.c();
+    					transition_in(if_block3, 1);
+    					if_block3.m(if_block3_anchor.parentNode, if_block3_anchor);
+    				}
+    			} else if (if_block3) {
+    				group_outros();
+
+    				transition_out(if_block3, 1, 1, () => {
+    					if_block3 = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block1);
+    			transition_in(if_block2);
+    			transition_in(if_block3);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block1);
+    			transition_out(if_block2);
+    			transition_out(if_block3);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t0);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(t1);
+    			if (if_block2) if_block2.d(detaching);
+    			if (detaching) detach_dev(t2);
+    			if (if_block3) if_block3.d(detaching);
+    			if (detaching) detach_dev(if_block3_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_then_block.name,
+    		type: "then",
+    		source: "(95:0) {:then}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (97:0) {#if state === -1}
     function create_if_block_3(ctx) {
     	let div;
     	let h1;
@@ -3353,11 +3618,11 @@ var app = (function () {
     			h1.textContent = "An error has occoured";
     			t1 = space();
     			p = element("p");
-    			t2 = text(/*error_msg*/ ctx[2]);
-    			add_location(h1, file, 68, 8, 1748);
-    			add_location(p, file, 69, 8, 1787);
+    			t2 = text(/*error_msg*/ ctx[4]);
+    			add_location(h1, file, 98, 8, 2839);
+    			add_location(p, file, 99, 8, 2878);
     			attr_dev(div, "class", "error svelte-1qsa0p6");
-    			add_location(div, file, 67, 4, 1720);
+    			add_location(div, file, 97, 4, 2811);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -3367,7 +3632,7 @@ var app = (function () {
     			append_dev(p, t2);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*error_msg*/ 4) set_data_dev(t2, /*error_msg*/ ctx[2]);
+    			if (dirty & /*error_msg*/ 16) set_data_dev(t2, /*error_msg*/ ctx[4]);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -3378,44 +3643,30 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(67:0) {#if state === -1}",
+    		source: "(97:0) {#if state === -1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (73:0) {#if state === 0}
+    // (103:0) {#if state === 0}
     function create_if_block_2(ctx) {
-    	let div;
-    	let t_1;
     	let teamannouncement;
     	let current;
-    	let mounted;
-    	let dispose;
 
     	teamannouncement = new TeamAnnouncement({
-    			props: { ct: /*ct*/ ctx[7], t: /*t*/ ctx[8] },
+    			props: { ct: /*ct*/ ctx[8], t: /*t*/ ctx[9] },
     			$$inline: true
     		});
 
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			t_1 = space();
     			create_component(teamannouncement.$$.fragment);
-    			add_location(div, file, 73, 4, 1845);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			insert_dev(target, t_1, anchor);
     			mount_component(teamannouncement, target, anchor);
     			current = true;
-
-    			if (!mounted) {
-    				dispose = listen_dev(div, "load", /*nextState*/ ctx[10](8000), false, false, false);
-    				mounted = true;
-    			}
     		},
     		p: noop,
     		i: function intro(local) {
@@ -3428,11 +3679,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			if (detaching) detach_dev(t_1);
     			destroy_component(teamannouncement, detaching);
-    			mounted = false;
-    			dispose();
     		}
     	};
 
@@ -3440,14 +3687,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(73:0) {#if state === 0}",
+    		source: "(103:0) {#if state === 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (77:0) {#if state === 1}
+    // (106:0) {#if state === 1}
     function create_if_block_1(ctx) {
     	let maps;
     	let current;
@@ -3455,12 +3702,13 @@ var app = (function () {
     	maps = new Maps({
     			props: {
     				userId: /*userId*/ ctx[5],
-    				sse: /*eventSource*/ ctx[4]
+    				sse: /*eventSource*/ ctx[6],
+    				enableBans: /*enableBans*/ ctx[7]
     			},
     			$$inline: true
     		});
 
-    	maps.$on("changeBackground", /*handleChangeBackground*/ ctx[9]);
+    	maps.$on("changeBackground", /*handleChangeBackground*/ ctx[11]);
 
     	const block = {
     		c: function create() {
@@ -3489,14 +3737,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(77:0) {#if state === 1}",
+    		source: "(106:0) {#if state === 1}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (80:0) {#if state === 2}
+    // (110:0) {#if state === 4}
     function create_if_block(ctx) {
     	let leaderboard;
     	let current;
@@ -3528,7 +3776,39 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(80:0) {#if state === 2}",
+    		source: "(110:0) {#if state === 4}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (93:28)  <p>Retriving tournament information</p> {:then}
+    function create_pending_block(ctx) {
+    	let p;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Retriving tournament information";
+    			add_location(p, file, 93, 0, 2739);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_pending_block.name,
+    		type: "pending",
+    		source: "(93:28)  <p>Retriving tournament information</p> {:then}",
     		ctx
     	});
 
@@ -3540,29 +3820,35 @@ var app = (function () {
     	let t0;
     	let header;
     	let t1;
-    	let t2;
-    	let t3;
-    	let t4;
-    	let if_block3_anchor;
+    	let await_block_anchor;
     	let current;
 
     	background = new Background({
-    			props: { image: /*backgroundIMG*/ ctx[0] },
+    			props: { image: /*backgroundIMG*/ ctx[1] },
     			$$inline: true
     		});
 
     	header = new Header({
     			props: {
-    				match_nr: /*match_nr*/ ctx[6],
+    				message: /*message*/ ctx[2],
     				state_name: /*state_name*/ ctx[3]
     			},
     			$$inline: true
     		});
 
-    	let if_block0 = /*state*/ ctx[1] === -1 && create_if_block_3(ctx);
-    	let if_block1 = /*state*/ ctx[1] === 0 && create_if_block_2(ctx);
-    	let if_block2 = /*state*/ ctx[1] === 1 && create_if_block_1(ctx);
-    	let if_block3 = /*state*/ ctx[1] === 2 && create_if_block(ctx);
+    	let info = {
+    		ctx,
+    		current: null,
+    		token: null,
+    		hasCatch: true,
+    		pending: create_pending_block,
+    		then: create_then_block,
+    		catch: create_catch_block,
+    		error: 15,
+    		blocks: [,,,]
+    	};
+
+    	handle_promise(/*setTournamentInfo*/ ctx[10](), info);
 
     	const block = {
     		c: function create() {
@@ -3570,14 +3856,8 @@ var app = (function () {
     			t0 = space();
     			create_component(header.$$.fragment);
     			t1 = space();
-    			if (if_block0) if_block0.c();
-    			t2 = space();
-    			if (if_block1) if_block1.c();
-    			t3 = space();
-    			if (if_block2) if_block2.c();
-    			t4 = space();
-    			if (if_block3) if_block3.c();
-    			if_block3_anchor = empty();
+    			await_block_anchor = empty();
+    			info.block.c();
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3587,119 +3867,39 @@ var app = (function () {
     			insert_dev(target, t0, anchor);
     			mount_component(header, target, anchor);
     			insert_dev(target, t1, anchor);
-    			if (if_block0) if_block0.m(target, anchor);
-    			insert_dev(target, t2, anchor);
-    			if (if_block1) if_block1.m(target, anchor);
-    			insert_dev(target, t3, anchor);
-    			if (if_block2) if_block2.m(target, anchor);
-    			insert_dev(target, t4, anchor);
-    			if (if_block3) if_block3.m(target, anchor);
-    			insert_dev(target, if_block3_anchor, anchor);
+    			insert_dev(target, await_block_anchor, anchor);
+    			info.block.m(target, info.anchor = anchor);
+    			info.mount = () => await_block_anchor.parentNode;
+    			info.anchor = await_block_anchor;
     			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(new_ctx, [dirty]) {
+    			ctx = new_ctx;
     			const background_changes = {};
-    			if (dirty & /*backgroundIMG*/ 1) background_changes.image = /*backgroundIMG*/ ctx[0];
+    			if (dirty & /*backgroundIMG*/ 2) background_changes.image = /*backgroundIMG*/ ctx[1];
     			background.$set(background_changes);
     			const header_changes = {};
+    			if (dirty & /*message*/ 4) header_changes.message = /*message*/ ctx[2];
     			if (dirty & /*state_name*/ 8) header_changes.state_name = /*state_name*/ ctx[3];
     			header.$set(header_changes);
-
-    			if (/*state*/ ctx[1] === -1) {
-    				if (if_block0) {
-    					if_block0.p(ctx, dirty);
-    				} else {
-    					if_block0 = create_if_block_3(ctx);
-    					if_block0.c();
-    					if_block0.m(t2.parentNode, t2);
-    				}
-    			} else if (if_block0) {
-    				if_block0.d(1);
-    				if_block0 = null;
-    			}
-
-    			if (/*state*/ ctx[1] === 0) {
-    				if (if_block1) {
-    					if_block1.p(ctx, dirty);
-
-    					if (dirty & /*state*/ 2) {
-    						transition_in(if_block1, 1);
-    					}
-    				} else {
-    					if_block1 = create_if_block_2(ctx);
-    					if_block1.c();
-    					transition_in(if_block1, 1);
-    					if_block1.m(t3.parentNode, t3);
-    				}
-    			} else if (if_block1) {
-    				group_outros();
-
-    				transition_out(if_block1, 1, 1, () => {
-    					if_block1 = null;
-    				});
-
-    				check_outros();
-    			}
-
-    			if (/*state*/ ctx[1] === 1) {
-    				if (if_block2) {
-    					if_block2.p(ctx, dirty);
-
-    					if (dirty & /*state*/ 2) {
-    						transition_in(if_block2, 1);
-    					}
-    				} else {
-    					if_block2 = create_if_block_1(ctx);
-    					if_block2.c();
-    					transition_in(if_block2, 1);
-    					if_block2.m(t4.parentNode, t4);
-    				}
-    			} else if (if_block2) {
-    				group_outros();
-
-    				transition_out(if_block2, 1, 1, () => {
-    					if_block2 = null;
-    				});
-
-    				check_outros();
-    			}
-
-    			if (/*state*/ ctx[1] === 2) {
-    				if (if_block3) {
-    					if (dirty & /*state*/ 2) {
-    						transition_in(if_block3, 1);
-    					}
-    				} else {
-    					if_block3 = create_if_block(ctx);
-    					if_block3.c();
-    					transition_in(if_block3, 1);
-    					if_block3.m(if_block3_anchor.parentNode, if_block3_anchor);
-    				}
-    			} else if (if_block3) {
-    				group_outros();
-
-    				transition_out(if_block3, 1, 1, () => {
-    					if_block3 = null;
-    				});
-
-    				check_outros();
-    			}
+    			update_await_block_branch(info, ctx, dirty);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(background.$$.fragment, local);
     			transition_in(header.$$.fragment, local);
-    			transition_in(if_block1);
-    			transition_in(if_block2);
-    			transition_in(if_block3);
+    			transition_in(info.block);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(background.$$.fragment, local);
     			transition_out(header.$$.fragment, local);
-    			transition_out(if_block1);
-    			transition_out(if_block2);
-    			transition_out(if_block3);
+
+    			for (let i = 0; i < 3; i += 1) {
+    				const block = info.blocks[i];
+    				transition_out(block);
+    			}
+
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -3707,14 +3907,10 @@ var app = (function () {
     			if (detaching) detach_dev(t0);
     			destroy_component(header, detaching);
     			if (detaching) detach_dev(t1);
-    			if (if_block0) if_block0.d(detaching);
-    			if (detaching) detach_dev(t2);
-    			if (if_block1) if_block1.d(detaching);
-    			if (detaching) detach_dev(t3);
-    			if (if_block2) if_block2.d(detaching);
-    			if (detaching) detach_dev(t4);
-    			if (if_block3) if_block3.d(detaching);
-    			if (detaching) detach_dev(if_block3_anchor);
+    			if (detaching) detach_dev(await_block_anchor);
+    			info.block.d(detaching);
+    			info.token = null;
+    			info = null;
     		}
     	};
 
@@ -3732,67 +3928,104 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let backgroundIMG = "csgo.png";
-    	let eventSource = new EventSource('http://127.0.0.1:5500/events');
+    	let backgroundIMG = "/img/csgo.png";
     	const urlParams = new URLSearchParams(window.location.search);
     	const userId = urlParams.get("uid");
+    	let eventSource = new EventSource('http://127.0.0.1:5500/events/' + userId);
 
     	// const auth = urlParams.get("auth");
     	// maybe not needed at all
-    	let match_nr = 1;
+    	// let matchNr and state get fetched by api
+    	let message = 'Dark Delta Gaming';
 
-    	let state = 1;
+    	let match = 0;
+    	let state = 0;
+    	let state_name = '';
     	let error_msg = "No errors occoured";
+    	let enableBans = false;
+
+    	eventSource.addEventListener('DDG_EVENT_NEWSTATE', event => {
+    		setTimeout(
+    			() => {
+    				let data = JSON.parse(event.data);
+
+    				if (data.state === 1) {
+    					$$invalidate(0, state = 0);
+
+    					setTimeout(
+    						() => {
+    							$$invalidate(0, state = 1);
+    						},
+    						3500
+    					);
+    				} else {
+    					$$invalidate(0, state = data.state);
+    				}
+
+    				$$invalidate(12, match = data.match);
+    			},
+    			1500
+    		);
+    	});
 
     	if (userId == null) {
-    		state = -1;
     		error_msg = "No userId was provided by URL query parameter. Be sure to use the link sent by the Tournament Steambot. If you think this is a bug contact NoRysq#8480 on Discord or @michihupf on GitHub.";
+    		state = -1;
     	}
 
     	let ct = ["NoRysq", "DanL"];
     	let t = ["Læffy", "m1k3"];
-    	let state_name = getStateName();
 
-    	function getStateName() {
+    	async function setTournamentInfo() {
+    		let response = await api.getJson('http://127.0.0.1:5500/tournament');
+
+    		if (response.state === 1) {
+    			$$invalidate(0, state = 0);
+
+    			setTimeout(
+    				() => {
+    					$$invalidate(0, state = 1);
+    				},
+    				3500
+    			);
+    		} else $$invalidate(0, state = parseInt(response.state));
+
+    		$$invalidate(12, match = parseInt(response.match));
+    		return Promise.resolve();
+    	}
+
+    	function setStateName() {
     		switch (state) {
     			case -1:
-    				return "An error occoured";
+    				$$invalidate(3, state_name = 'An error occoured');
+    				break;
     			case 0:
-    				return "Announce Team";
+    				$$invalidate(3, state_name = 'Team Reveal');
+    				break;
     			case 1:
-    				return "Ban Map";
-    			case 2:
-    				return "Leaderboard";
+    				$$invalidate(3, state_name = 'Map Pick');
+    				break;
+    			case 4:
+    				$$invalidate(3, state_name = 'Leaderboard');
+    				break;
     			default:
-    				return "";
+    				$$invalidate(3, state_name = '');
     		}
     	}
 
     	function handleChangeBackground(event) {
     		setTimeout(
     			() => {
-    				$$invalidate(0, backgroundIMG = event.detail.img);
+    				$$invalidate(1, backgroundIMG = event.detail.img);
     			},
     			500
-    		);
-
-    		nextState(3000);
-    	}
-
-    	function nextState(delay) {
-    		setTimeout(
-    			() => {
-    				$$invalidate(1, state++, state);
-    				$$invalidate(3, state_name = getStateName());
-    			},
-    			delay
     		);
     	}
 
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$capture_state = () => ({
@@ -3801,48 +4034,67 @@ var app = (function () {
     		Maps,
     		TeamAnnouncement,
     		Leaderboard,
+    		getJson: api.getJson,
     		backgroundIMG,
-    		eventSource,
     		urlParams,
     		userId,
-    		match_nr,
+    		eventSource,
+    		message,
+    		match,
     		state,
+    		state_name,
     		error_msg,
+    		enableBans,
     		ct,
     		t,
-    		state_name,
-    		getStateName,
-    		handleChangeBackground,
-    		nextState
+    		setTournamentInfo,
+    		setStateName,
+    		handleChangeBackground
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('backgroundIMG' in $$props) $$invalidate(0, backgroundIMG = $$props.backgroundIMG);
-    		if ('eventSource' in $$props) $$invalidate(4, eventSource = $$props.eventSource);
-    		if ('match_nr' in $$props) $$invalidate(6, match_nr = $$props.match_nr);
-    		if ('state' in $$props) $$invalidate(1, state = $$props.state);
-    		if ('error_msg' in $$props) $$invalidate(2, error_msg = $$props.error_msg);
-    		if ('ct' in $$props) $$invalidate(7, ct = $$props.ct);
-    		if ('t' in $$props) $$invalidate(8, t = $$props.t);
+    		if ('backgroundIMG' in $$props) $$invalidate(1, backgroundIMG = $$props.backgroundIMG);
+    		if ('eventSource' in $$props) $$invalidate(6, eventSource = $$props.eventSource);
+    		if ('message' in $$props) $$invalidate(2, message = $$props.message);
+    		if ('match' in $$props) $$invalidate(12, match = $$props.match);
+    		if ('state' in $$props) $$invalidate(0, state = $$props.state);
     		if ('state_name' in $$props) $$invalidate(3, state_name = $$props.state_name);
+    		if ('error_msg' in $$props) $$invalidate(4, error_msg = $$props.error_msg);
+    		if ('enableBans' in $$props) $$invalidate(7, enableBans = $$props.enableBans);
+    		if ('ct' in $$props) $$invalidate(8, ct = $$props.ct);
+    		if ('t' in $$props) $$invalidate(9, t = $$props.t);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*state*/ 1) {
+    			console.log(state) && setStateName();
+    		}
+
+    		if ($$self.$$.dirty & /*state, match*/ 4097) {
+    			$$invalidate(2, message = state === -2
+    			? 'Dark Delta Gaming'
+    			: 'Match #' + (match + 1));
+    		}
+    	};
+
     	return [
-    		backgroundIMG,
     		state,
-    		error_msg,
+    		backgroundIMG,
+    		message,
     		state_name,
-    		eventSource,
+    		error_msg,
     		userId,
-    		match_nr,
+    		eventSource,
+    		enableBans,
     		ct,
     		t,
+    		setTournamentInfo,
     		handleChangeBackground,
-    		nextState
+    		match
     	];
     }
 

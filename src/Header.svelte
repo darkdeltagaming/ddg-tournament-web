@@ -1,12 +1,12 @@
 <script>
     import { fade } from 'svelte/transition'
 
-    export let match_nr;
+    export let message;
     export let state_name;
 </script>
 
 <div class="head">
-    <h1>MATCH #{match_nr}</h1>
+    <h1>{message}</h1>
     <img src="/favicon.png" alt="Dark Delta Gaming" class="logo">
     {#key state_name}
         <h1 in:fade={{ delay: 800 }} out:fade>{state_name.toUpperCase()}</h1>

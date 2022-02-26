@@ -1,6 +1,6 @@
 <script>
     import { fade } from 'svelte/transition';
-    export let image = "csgo.png";
+    export let image = "/img/csgo.png";
     let displayed = image;
     let blacken = false;
 
@@ -20,7 +20,7 @@
 <div class="bg-container">
     {#if !blacken}
         <div transition:fade={{ duration: 200}}>
-            <img class="background" src="/img/{displayed}" alt="background"/>
+            <img class="background" src="{displayed}" alt="background"/>
         </div>
     {/if}
 </div>

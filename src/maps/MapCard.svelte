@@ -5,25 +5,24 @@
     export let map_name;
     export let map_id;
     export let status;
+    export let enableBans;
 
     const dispatch = createEventDispatcher();
 
     function dispatchBan() {
-        dispatch('ban', { mapId: map_id });
+        if (enableBans && status === 0)
+            dispatch('ban', { mapId: map_id });
     }
-
-    export function pickMap() {
-        picked = true;
-    }
-
 </script>
 
-<div class="card {status === 1 ? 'banned' : status === 2 ? 'picked' : ''}" style="--image: url('http://127.0.0.1:5500/mapImage/{map_id}');" on:click={dispatchBan}> 
+<div class="card {status === 1 ? 'banned' : status === 3 ? 'picked' : ''}" 
+    style="--image: url('http://127.0.0.1:5500/mapImage/{map_id}'); 
+    --pointer: {enableBans ? 'pointer' : 'default'}" on:click={dispatchBan}> 
     <div class="background"></div>
     {#if status === 1}
         <BannedIcon />
     {/if}
-    {#if status === 2}
+    {#if status === 3}
         <PickedIcon />
     {/if}
     <div class="headline">
@@ -39,7 +38,7 @@
         height: 60vh;
         border: 3px solid #181717;
         border-radius: 10px;
-        cursor: pointer;
+        cursor: var(--pointer);
     }
 
     .banned {

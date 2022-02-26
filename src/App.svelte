@@ -4,42 +4,80 @@
 	import Maps from "./maps/Maps.svelte";
 	import TeamAnnouncement from "./teams/TeamAnnouncement.svelte";
     import Leaderboard from "./leaderboard/Leaderboard.svelte";
+    import { getJson } from './api';
 
-	let backgroundIMG = "csgo.png";
-
-    let eventSource = new EventSource('http://127.0.0.1:5500/events');
+	let backgroundIMG = "/img/csgo.png";
 
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get("uid");
+
+    let eventSource = new EventSource('http://127.0.0.1:5500/events/' + userId);
     // const auth = urlParams.get("auth");
     // maybe not needed at all
 
-	let match_nr = 1;
-	let state = 1;
+    // let matchNr and state get fetched by api
+    let message = 'Dark Delta Gaming';
+    let match = 0;
+    let state = 0;
+    let state_name = '';
     let error_msg = "No errors occoured";
+    let enableBans = false;
+
+    eventSource.addEventListener('DDG_EVENT_NEWSTATE', event => {
+        setTimeout(() => {
+            let data = JSON.parse(event.data);
+            if (data.state === 1) {
+                state = 0;
+                setTimeout(() => {
+                    state = 1;
+                }, 3500);
+            } else {
+                state = data.state;
+            }
+            match = data.match;
+        }, 1500);
+    });
 
     if (userId == null) {
-        state = -1;
         error_msg = "No userId was provided by URL query parameter. Be sure to use the link sent by the Tournament Steambot. If you think this is a bug contact NoRysq#8480 on Discord or @michihupf on GitHub.";
+        state = -1;
     }
 
 	let ct = ["NoRysq", "DanL"];
 	let t =  ["Læffy", "m1k3"];
 
-	let state_name = getStateName();
+    $: console.log(state) && setStateName();
+    $: message = state === -2 ? 'Dark Delta Gaming' : 'Match #' + (match + 1);
 
-	function getStateName() {
+    async function setTournamentInfo() {
+        let response = await getJson('http://127.0.0.1:5500/tournament');
+        if (response.state === 1) {
+            state = 0;
+            setTimeout(() => {
+                state = 1;
+            }, 3500);
+        } else
+            state = parseInt(response.state);
+        match = parseInt(response.match);
+        return Promise.resolve();
+    }
+
+	function setStateName() {
 		switch (state) {
             case -1:
-                return "An error occoured";
-			case 0:
-				return "Announce Team";
+                state_name = 'An error occoured';
+                break;
+            case 0:
+                state_name = 'Team Reveal';
+                break;
 			case 1:
-				return "Ban Map";
-			case 2:
-				return "Leaderboard";
+				state_name = 'Map Pick';
+                break;
+			case 4:
+			    state_name = 'Leaderboard';
+                break;
 			default:
-				return "";
+				state_name = '';
 		}
 	}
 
@@ -47,22 +85,14 @@
 		setTimeout(() => {
 			backgroundIMG = event.detail.img;
 		}, 500);
-		nextState(3000);
 	}
-
-	function nextState(delay) {
-		setTimeout(() => {
-			state++;
-			state_name = getStateName();
-		}, delay);
-	}
-
-    // Event Handler for sending API Requests from within Components
-    // function requestAPIHandler();
-
 </script>
+
 <Background image={backgroundIMG}/>
-<Header match_nr={match_nr} state_name={state_name}/>
+<Header message={message} state_name={state_name}/>
+{#await setTournamentInfo()}
+<p>Retriving tournament information</p>
+{:then}
 
 {#if state === -1}
     <div class="error">
@@ -71,15 +101,21 @@
     </div>
 {/if}
 {#if state === 0}
-    <div on:load={nextState(8000)}></div>
     <TeamAnnouncement ct={ct} t={t}/>
 {/if}
 {#if state === 1}
-    <Maps on:changeBackground={handleChangeBackground} userId={userId} sse={eventSource}/>
+    <Maps on:changeBackground={handleChangeBackground} userId={userId} 
+        sse={eventSource} enableBans={enableBans}/>
 {/if}
-{#if state === 2}
+{#if state === 4}
     <Leaderboard/>
 {/if}
+{:catch error}
+    <div class="error">
+        <h1>An error has occoured</h1>
+        <p>{error}</p>
+    </div>
+{/await}
 
 <style>
     .error {
